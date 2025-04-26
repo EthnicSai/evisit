@@ -23,7 +23,7 @@ const SignupPage = () => {
     setIsSubmitting(true); // Set loading state to true
 
     try {
-      const res = await axios.post(`${process.env.REACT_APP_API_URL}/api/users/register`, formData);
+      const res = await axios.post(`${process.env.VITE_API_URL}/api/users/register`, formData);
       navigate('/login'); // Redirect to login after successful signup
     } catch (err) {
       setError(err.response?.data?.message || 'Error creating account, please try again.');
