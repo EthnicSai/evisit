@@ -14,7 +14,7 @@ const Login = () => {
     e.preventDefault();
     setIsLoading(true);
     try {
-      const res = await axios.post(`${process.env.RVITE_API_URL}/api/users/login`, { email, password });
+      const res = await axios.post(`${import.meta.env.VITE_API_URL}/api/users/login`, { email, password });
       // Save token to localStorage
       localStorage.setItem('authToken', res.data.token);  // Save token
       navigate(`/cardManager/${res.data.user._id}`);  // Redirect to card manager page
