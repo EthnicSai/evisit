@@ -1,0 +1,74 @@
+/* signupPage.css */
+.signup-container {
+    text-align: center;
+    padding: 3rem;
+    background-color: #AFDDE5; /* Light Teal background */
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .signup-container h2 {
+    font-size: 2.5rem;
+    color: #604652; /* Dark Purple */
+    margin-bottom: 1.5rem;
+  }
+  
+  .signup-container p {
+    color: #FF4D4D; /* Red color for error messages */
+    font-size: 1.125rem;
+    margin-bottom: 1rem;
+  }
+  
+  .signup-container form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+    max-width: 400px;
+    width: 100%;
+  }
+  
+  .signup-container input {
+    padding: 12px 20px;
+    font-size: 16px;
+    border-radius: 25px;
+    border: 1px solid #ccc;
+    margin: 0 auto;
+    width: 100%;
+    max-width: 400px;
+  }
+  
+  .signup-container input:focus {
+    outline: none;
+    border-color: #D29F80; /* Light Beige */
+  }
+  
+  .signup-container button {
+    background-color: #D29F80; /* Light Beige */
+    color: #fff;
+    border: none;
+    padding: 12px 30px;
+    font-size: 16px;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out;
+    width: 100%;
+    max-width: 400px;
+  }
+  
+  .signup-container button:hover {
+    background-color: #604652; /* Dark Purple */
+  }
+  
+  .signup-container a {
+    color: #97866A; /* Olive Green */
+    text-decoration: none;
+    margin-top: 1rem;
+  }
+  
+  .signup-container a:hover {
+    color: #D29F80; /* Light Beige */
+  }
+  

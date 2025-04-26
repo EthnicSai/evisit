@@ -1,0 +1,74 @@
+/* Login.css */
+.login-container {
+    text-align: center;
+    padding: 3rem;
+    background-color: #AFDDE5; /* Light Teal background */
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .login-container h2 {
+    font-size: 2.5rem;
+    color: #604652; /* Dark Purple */
+    margin-bottom: 1.5rem;
+  }
+  
+  .login-container p {
+    color: #FF4D4D; /* Red color for error messages */
+    font-size: 1.125rem;
+    margin-bottom: 1rem;
+  }
+  
+  .login-container form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+    max-width: 400px;
+    width: 100%;
+  }
+  
+  .login-container input {
+    padding: 12px 20px;
+    font-size: 16px;
+    border-radius: 25px;
+    border: 1px solid #ccc;
+    margin: 0 auto;
+    width: 100%;
+    max-width: 400px;
+  }
+  
+  .login-container input:focus {
+    outline: none;
+    border-color: #D29F80; /* Light Beige */
+  }
+  
+  .login-container button {
+    background-color: #D29F80; /* Light Beige */
+    color: #fff;
+    border: none;
+    padding: 12px 30px;
+    font-size: 16px;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out;
+    width: 100%;
+    max-width: 400px;
+  }
+  
+  .login-container button:hover {
+    background-color: #604652; /* Dark Purple */
+  }
+  
+  .login-container a {
+    color: #97866A; /* Olive Green */
+    text-decoration: none;
+    margin-top: 1rem;
+  }
+  
+  .login-container a:hover {
+    color: #D29F80; /* Light Beige */
+  }
+  

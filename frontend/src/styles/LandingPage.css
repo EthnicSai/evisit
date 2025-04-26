@@ -1,0 +1,48 @@
+/* LandingPage.css */
+.landing-container {
+    text-align: center;
+    padding: 3rem;
+    background-color: #AFDDE5; /* Light Teal background */
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .landing-container h1 {
+    font-size: 3rem;
+    color: #604652; /* Dark Purple */
+    margin-bottom: 1rem;
+  }
+  
+  .landing-container p {
+    font-size: 1.25rem;
+    color: #735557; /* Muted Brown */
+    margin-bottom: 2rem;
+  }
+  
+  .landing-container button {
+    background-color: #D29F80; /* Light Beige */
+    color: #fff;
+    border: none;
+    padding: 12px 30px;
+    font-size: 16px;
+    border-radius: 25px;
+    margin: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out;
+  }
+  
+  .landing-container button:hover {
+    background-color: #604652; /* Dark Purple */
+  }
+  
+  .landing-container a {
+    text-decoration: none;
+  }
+  
+  .landing-container a:hover {
+    text-decoration: none;
+  }
+  

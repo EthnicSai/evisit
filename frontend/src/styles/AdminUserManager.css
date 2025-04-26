@@ -1,0 +1,70 @@
+/* adminUserManager.css */
+.admin-user-manager {
+    background-color: #AFDDE5; /* Light Teal background */
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 3rem;
+  }
+  
+  .admin-user-manager h2 {
+    color: #604652; /* Dark Purple for heading */
+    font-size: 2.5rem;
+    margin-bottom: 2rem;
+    text-align: center;
+  }
+  
+  ul {
+    list-style-type: none;
+    padding: 0;
+    width: 100%;
+    max-width: 800px;
+  }
+  
+  ul li {
+    background-color: #fff; /* White background for user items */
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+    border-radius: 10px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  ul li p {
+    font-size: 1.2rem;
+    color: #604652; /* Dark Purple for text */
+    margin: 0;
+  }
+  
+  button {
+    background-color: #D29F80; /* Light Beige */
+    color: #fff;
+    border: none;
+    padding: 12px 30px;
+    font-size: 16px;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out;
+  }
+  
+  button:hover {
+    background-color: #604652; /* Dark Purple */
+  }
+  
+  button:focus {
+    outline: none;
+  }
+  
+  @media (max-width: 768px) {
+    .admin-user-manager {
+      padding: 2rem;
+    }
+  
+    ul li {
+      padding: 1rem;
+    }
+  }
+  

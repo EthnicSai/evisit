@@ -1,0 +1,89 @@
+/* app.css */
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+  background-color: #AFDDE5; /* Light Teal */
+}
+
+.logo {
+  height: 6em;
+  padding: 1.5em;
+  will-change: filter;
+  transition: filter 300ms;
+}
+
+.logo:hover {
+  filter: drop-shadow(0 0 2em #97866A); /* Olive Green */
+}
+
+.logo.react:hover {
+  filter: drop-shadow(0 0 2em #D29F80); /* Light Beige */
+}
+
+@keyframes logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  a:nth-of-type(2) .logo {
+    animation: logo-spin infinite 20s linear;
+  }
+}
+
+.card {
+  padding: 2em;
+  background-color: #AFDDE5; /* Light Teal */
+  border-radius: 10px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+  color: #604652; /* Dark Purple */
+}
+
+.read-the-docs {
+  color: #735557; /* Muted Brown */
+}
+
+button {
+  background-color: #D29F80; /* Light Beige */
+  color: #fff;
+  border: none;
+  padding: 12px 30px;
+  font-size: 16px;
+  border-radius: 25px;
+  margin: 15px 0;
+  cursor: pointer;
+  transition: background-color 0.3s ease-in-out;
+}
+
+button:hover {
+  background-color: #604652; /* Dark Purple */
+}
+
+a {
+  color: #97866A; /* Olive Green */
+  text-decoration: none;
+}
+
+a:hover {
+  color: #D29F80; /* Light Beige */
+}
+
+@media (max-width: 768px) {
+  #root {
+    padding: 1rem;
+  }
+
+  .logo {
+    height: 5em;
+  }
+
+  .card {
+    padding: 1.5em;
+  }
+}

@@ -1,0 +1,183 @@
+/* cardCreatePage.css */
+:root {
+  --primary-bg: #AFDDE5;        /* Light Teal background */
+  --form-bg: #fff;              /* White form background */
+  --heading-color: #604652;     /* Dark Purple */
+  --error-color: #FF4D4D;       /* Red for errors */
+  --input-focus: #D29F80;       /* Light Beige */
+  --button-bg: #D29F80;         /* Light Beige */
+  --button-hover: #604652;      /* Dark Purple */
+  --button-disabled: #cccccc;
+  --border-color: #cccccc;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  height: 100%;
+  font-family: 'Arial', sans-serif;
+}
+
+.page-wrapper {
+  background-color: var(--primary-bg);
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start; /* Align content at the start of the flex container */
+  padding-top: 30vh; /* Start the form from 30% of the screen height */
+}
+
+.card-create-container {
+  background-color: var(--form-bg);
+  padding: 2.5rem;
+  border-radius: 10px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 600px;
+  margin: 1rem;
+}
+
+.card-create-container h2 {
+  color: var(--heading-color);
+  font-size: 2rem;
+  margin-bottom: 1.5rem;
+  text-align: center;
+  font-weight: 600;
+}
+
+.error-message {
+  color: var(--error-color);
+  font-size: 1rem;
+  margin-bottom: 1.5rem;
+  text-align: center;
+  padding: 0.75rem;
+  background-color: rgba(255, 77, 77, 0.1);
+  border-radius: 5px;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group {
+  margin-bottom: 1.25rem;
+  position: relative;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 0.75rem 1.25rem;
+  font-size: 1rem;
+  border-radius: 25px;
+  border: 1px solid var(--border-color);
+  transition: all 0.3s ease;
+}
+
+.form-group input:focus {
+  outline: none;
+  border-color: var(--input-focus);
+  box-shadow: 0 0 0 3px rgba(210, 159, 128, 0.2);
+}
+
+.form-group input::placeholder {
+  color: #999999;
+}
+
+.form-group:focus-within input {
+  border-color: var(--input-focus);
+}
+
+.file-upload {
+  text-align: center;
+  margin: 1.5rem 0;
+}
+
+.file-upload label {
+  display: block;
+  font-size: 1rem;
+  color: var(--heading-color);
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+}
+
+.file-upload input[type="file"] {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px dashed var(--border-color);
+  border-radius: 25px;
+  background-color: rgba(255, 255, 255, 0.8);
+}
+
+button {
+  background-color: var(--button-bg);
+  color: white;
+  border: none;
+  padding: 0.75rem;
+  font-size: 1rem;
+  font-weight: 500;
+  border-radius: 25px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-top: 0.5rem;
+}
+
+button:hover {
+  background-color: var(--button-hover);
+  transform: translateY(-2px);
+}
+
+button:disabled {
+  background-color: var(--button-disabled);
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .page-wrapper {
+    padding-top: 25vh; /* Reduce padding on smaller screens */
+    align-items: flex-start;
+  }
+
+  .card-create-container {
+    padding: 1.75rem;
+    margin-top: 1rem;
+  }
+
+  .card-create-container h2 {
+    font-size: 1.75rem;
+  }
+
+  .form-group input,
+  .file-upload input[type="file"],
+  button {
+    font-size: 0.95rem;
+    padding: 0.75rem 1.1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .page-wrapper {
+    padding-top: 20vh; /* Reduce further for very small screens */
+  }
+
+  .card-create-container {
+    padding: 1.5rem;
+  }
+
+  .card-create-container h2 {
+    font-size: 1.5rem;
+  }
+
+  .form-group input,
+  .file-upload input[type="file"],
+  button {
+    padding: 0.65rem 1rem;
+    font-size: 0.9rem;
+  }
+}
