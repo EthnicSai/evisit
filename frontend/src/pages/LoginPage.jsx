@@ -7,24 +7,28 @@ const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setIsLoading(true);
     try {
-      const res = await axios.post('http://localhost:5000/api/users/login', { email, password });
+      const res = await axios.post(`${process.env.REACT_APP_API_URL}/api/users/login`, { email, password });
       // Save token to localStorage
       localStorage.setItem('authToken', res.data.token);  // Save token
       navigate(`/cardManager/${res.data.user._id}`);  // Redirect to card manager page
     } catch (err) {
       setError('Invalid credentials');
+    } finally {
+      setIsLoading(false);
     }
   };
 
   return (
     <div className="login-container">
       <h2>Login</h2>
-      {error && <p>{error}</p>}
+      {error && <p className="error-message">{error}</p>}
       <form onSubmit={handleSubmit}>
         <input
           type="email"
@@ -40,7 +44,9 @@ const Login = () => {
           onChange={(e) => setPassword(e.target.value)}
           required
         />
-        <button type="submit">Login</button>
+        <button type="submit" disabled={isLoading}>
+          {isLoading ? 'Logging in...' : 'Login'}
+        </button>
       </form>
     </div>
   );

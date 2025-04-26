@@ -10,6 +10,7 @@ const SignupPage = () => {
     password: '',
   });
   const [error, setError] = useState('');
+  const [isSubmitting, setIsSubmitting] = useState(false); // Add loading state
   const navigate = useNavigate();
 
   const handleChange = (e) => {
@@ -19,20 +20,22 @@ const SignupPage = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setIsSubmitting(true); // Set loading state to true
+
     try {
-      // Correct the API endpoint
-      const res = await axios.post('http://localhost:5000/api/users/register', formData);
+      const res = await axios.post(`${process.env.REACT_APP_API_URL}/api/users/register`, formData);
       navigate('/login'); // Redirect to login after successful signup
     } catch (err) {
-      setError('Error creating account, please try again.');
+      setError(err.response?.data?.message || 'Error creating account, please try again.');
+    } finally {
+      setIsSubmitting(false); // Reset loading state after request
     }
   };
-  
 
   return (
     <div className="signup-container">
       <h2>Sign Up</h2>
-      {error && <p>{error}</p>}
+      {error && <p className="error-message">{error}</p>}
       <form onSubmit={handleSubmit}>
         <input
           type="text"
@@ -58,7 +61,9 @@ const SignupPage = () => {
           placeholder="Password"
           required
         />
-        <button type="submit">Sign Up</button>
+        <button type="submit" disabled={isSubmitting}>
+          {isSubmitting ? 'Signing Up...' : 'Sign Up'}
+        </button>
       </form>
     </div>
   );

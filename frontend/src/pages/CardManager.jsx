@@ -10,11 +10,12 @@ const CardManager = () => {
   const [selectedCard, setSelectedCard] = useState(null);
   const { userId } = useParams();
   const navigate = useNavigate();
+  const API_URL = import.meta.env.VITE_API_URL;
 
   useEffect(() => {
     const fetchCards = async () => {
       try {
-        const response = await axios.get(`http://localhost:5000/api/cards/getCards/${userId}`);
+        const response = await axios.get(`${API_URL}/api/cards/getCards/${userId}`);
         setCards(response.data);
       } catch (error) {
         console.error('Error fetching cards:', error);
@@ -25,7 +26,7 @@ const CardManager = () => {
     if (userId) {
       fetchCards();
     }
-  }, [userId]);
+  }, [userId, API_URL]);
 
   const handleLogout = () => {
     localStorage.removeItem('authToken');
@@ -46,7 +47,7 @@ const CardManager = () => {
 
   const handleDelete = async (cardId) => {
     try {
-      const response = await axios.delete(`http://localhost:5000/api/cards/deleteCard/${cardId}`);
+      const response = await axios.delete(`${API_URL}/api/cards/deleteCard/${cardId}`);
       if (response.status === 200) {
         setCards(cards.filter(card => card._id !== cardId));
         alert('Card deleted successfully!');
@@ -78,6 +79,13 @@ const CardManager = () => {
               <p>Age: {card.age}</p>
               <p>Qualification: {card.qualification}</p>
               <p>Designation: {card.designation}</p>
+              {card.imageUrl && (
+                <img
+                  src={`${API_URL}${card.imageUrl}`}
+                  alt={`${card.name} Profile`}
+                  className="card-image"
+                />
+              )}
               <button onClick={() => openModal(card)}>View Card</button>
             </div>
           ))}

@@ -3,22 +3,23 @@ import axios from 'axios';
 
 const AdminUserManager = () => {
   const [users, setUsers] = useState([]);
+  const API_URL = import.meta.env.VITE_API_URL;
 
   useEffect(() => {
     const fetchUsers = async () => {
       try {
-        const response = await axios.get('http://localhost:5000/api/users');
+        const response = await axios.get(`${API_URL}/api/users`);
         setUsers(response.data);
       } catch (error) {
         console.error('Error fetching users', error);
       }
     };
     fetchUsers();
-  }, []);
+  }, [API_URL]);
 
   const handleDeleteUser = async (userId) => {
     try {
-      await axios.delete(`http://localhost:5000/api/users/${userId}`);
+      await axios.delete(`${API_URL}/api/users/${userId}`);
       setUsers(users.filter(user => user._id !== userId));
     } catch (error) {
       console.error('Error deleting user', error);

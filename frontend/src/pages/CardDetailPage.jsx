@@ -8,11 +8,12 @@ const CardDetailPage = () => {
   const [error, setError] = useState(''); 
   const { cardId } = useParams(); 
   const navigate = useNavigate();
+  const API_URL = import.meta.env.VITE_API_URL;
 
   useEffect(() => {
     const fetchCard = async () => {
       try {
-        const response = await axios.get(`http://localhost:5000/api/cards/getCard/${cardId}`);
+        const response = await axios.get(`${API_URL}/api/cards/getCard/${cardId}`);
         setCard(response.data);
       } catch (error) {
         console.error('Error fetching card:', error); 
@@ -23,7 +24,7 @@ const CardDetailPage = () => {
     if (cardId) {
       fetchCard();
     }
-  }, [cardId]);
+  }, [cardId, API_URL]);
 
   const handleBackToCards = () => {
     navigate(`/cards/manage/${card.userId}`); 
@@ -31,7 +32,7 @@ const CardDetailPage = () => {
 
   const handleDelete = async () => {
     try {
-      await axios.delete(`http://localhost:5000/api/cards/deleteCard/${cardId}`);
+      await axios.delete(`${API_URL}/api/cards/deleteCard/${cardId}`);
       navigate(`/cards/manage/${card.userId}`);
     } catch (error) {
       console.error('Error deleting card:', error); 
@@ -57,8 +58,20 @@ const CardDetailPage = () => {
           <p><strong>Bio:</strong> {card.bio}</p>
 
           <div className="card-images">
-            <img src={card.imageUrl} alt={`${card.name} Image`} className="card-image" />
-            <img src={card.qrCodeUrl} alt={`${card.name} QR Code`} className="qr-code" />
+            {card.imageUrl && (
+              <img
+                src={`${API_URL}${card.imageUrl}`}
+                alt={`${card.name} Image`}
+                className="card-image"
+              />
+            )}
+            {card.qrCodeUrl && (
+              <img
+                src={card.qrCodeUrl}
+                alt={`${card.name} QR Code`}
+                className="qr-code"
+              />
+            )}
           </div>
 
           <div className="button-group">

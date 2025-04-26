@@ -4,6 +4,8 @@ import '../styles/CardModal.css';
 const CardModal = ({ card, closeModal, handleDelete }) => {
   if (!card) return null;
 
+  const API_URL = import.meta.env.VITE_API_URL;
+
   const onDelete = () => {
     if (window.confirm(`Are you sure you want to delete the card of ${card.name}?`)) {
       handleDelete(card._id);
@@ -18,7 +20,7 @@ const CardModal = ({ card, closeModal, handleDelete }) => {
         <h3>{card.name}</h3>
         {card.imageUrl ? (
           <img 
-            src={card.imageUrl ? `http://localhost:5000${card.imageUrl}` : ''} 
+            src={`${API_URL}${card.imageUrl}`} 
             alt={card.name} 
             className="card-image" 
           />
@@ -32,7 +34,13 @@ const CardModal = ({ card, closeModal, handleDelete }) => {
         <p>Email: {card.email}</p>
         <div className="qr-container">
           <h4>QR Code:</h4>
-          <img src={card.qrCode} alt="QR Code" className="qr-image" />
+          {card.qrCode && (
+            <img 
+              src={card.qrCode} 
+              alt="QR Code" 
+              className="qr-image" 
+            />
+          )}
         </div>
 
         {/* Delete Button */}

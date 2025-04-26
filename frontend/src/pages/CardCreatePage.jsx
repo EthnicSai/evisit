@@ -17,6 +17,7 @@ const CardCreatePage = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const { userId } = useParams();
   const navigate = useNavigate();
+  const API_URL = import.meta.env.VITE_API_URL;
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -51,14 +52,12 @@ const CardCreatePage = () => {
     formData.append('userId', userId);
 
     try {
-      // Send request to create the card
-      await axios.post(`http://localhost:5000/api/cards/addCard`, formData, {
+      await axios.post(`${API_URL}/api/cards/addCard`, formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },
       });
       
-      // After card creation, redirect to the CardManager page
       navigate(`/cardManager/${userId}`);
     } catch (error) {
       console.error('Error creating card', error);
