@@ -1,131 +1,107 @@
-/* Modal overlay */
+/* Import Font */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+
+/* Modal Overlay */
 .modal-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: rgba(0, 0, 0, 0.7); /* Dark background to dim the screen */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 1000;
-    font-family: 'Roboto', sans-serif; /* Stylish font */
-  }
-  
-  /* Modal content */
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2000;
+  padding: 1rem;
+  font-family: 'Inter', sans-serif;
+}
+
+/* Modal Content */
+.modal-content {
+  background-color: #ffffff;
+  border-radius: 12px;
+  max-width: 500px;
+  width: 100%;
+  padding: 2rem;
+  position: relative;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+  text-align: center;
+  color: #1f2937;
+}
+
+/* Close Button */
+.close-btn {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: transparent;
+  border: none;
+  font-size: 1.2rem;
+  font-weight: bold;
+  cursor: pointer;
+  color: #4a5568;
+  transition: color 0.3s ease;
+}
+.close-btn:hover {
+  color: #e53e3e;
+}
+
+/* Card Image */
+.card-image {
+  width: 100%;
+  max-width: 300px;
+  margin: 1rem auto;
+  border-radius: 10px;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+}
+
+/* QR Code Section */
+.qr-container {
+  margin-top: 1.5rem;
+}
+.qr-container h4 {
+  margin-bottom: 0.5rem;
+  color: #2c3e50;
+}
+.qr-image {
+  width: 150px;
+  height: 150px;
+  object-fit: contain;
+  margin: 0 auto;
+}
+
+/* Text Content */
+.modal-content p {
+  margin: 0.3rem 0;
+  color: #4a5568;
+  font-size: 1rem;
+}
+
+/* Delete Button */
+.delete-btn {
+  margin-top: 2rem;
+  padding: 0.8rem 1.5rem;
+  border: none;
+  border-radius: 6px;
+  font-weight: 600;
+  background: linear-gradient(to right, #e53e3e, #f56565);
+  color: white;
+  cursor: pointer;
+  box-shadow: 0 4px 15px rgba(229, 62, 62, 0.4);
+  transition: transform 0.3s ease;
+}
+.delete-btn:hover {
+  transform: scale(1.05);
+}
+
+/* Responsive */
+@media (max-width: 600px) {
   .modal-content {
-    background-color: #fff;
-    padding: 20px;
-    border-radius: 12px;
-    max-width: 400px; /* Reduced the width */
-    width: 100%;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    position: relative;
-    text-align: center; /* Centered text */
-    font-family: 'Arial', sans-serif; /* Stylish font for content */
+    padding: 1.5rem;
   }
-  
-  /* Close button */
-  .close-btn {
-    position: absolute;
-    top: 15px;
-    right: 15px;
-    background-color: #ff4d4d;
-    border: none;
-    font-size: 24px;
-    color: white;
-    cursor: pointer;
-    border-radius: 50%;
-    padding: 5px 10px;
-    transition: background-color 0.3s ease;
-  }
-  
-  .close-btn:hover {
-    background-color: #e60000;
-  }
-  
-  /* Card name */
-  h3 {
-    font-size: 22px; /* Reduced font size */
-    color: #333;
-    font-weight: 600;
-    margin-bottom: 15px;
-  }
-  
-  /* Image styling - Mimicking a visiting card size */
-  .card-image {
-    width: 100%; /* Maximize the available space */
-    height: auto;
-    max-width: 85mm;  /* Slightly smaller than before */
-    max-height: 50mm; /* Slightly smaller than before */
-    border-radius: 10px;
-    margin-bottom: 20px;
-    object-fit: contain; /* Ensures the image maintains aspect ratio without stretching */
-  }
-  
-  /* Information text styling */
-  p {
-    font-size: 14px; /* Reduced font size */
-    color: #555;
-    margin-bottom: 8px;
-    line-height: 1.6;
-  }
-  
-  /* QR container */
-  .qr-container {
-    margin-top: 20px; /* Reduced margin */
-    text-align: center;
-  }
-  
   .qr-image {
-    width: 100px;
-    height: 100px;
-    border-radius: 8px;
-    margin-top: 15px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 120px;
+    height: 120px;
   }
-  
-  /* Delete button */
-  .delete-btn {
-    margin-top: 15px; /* Reduced margin */
-    background-color: red;
-    color: white;
-    padding: 10px;
-    border: none;
-    cursor: pointer;
-    border-radius: 5px;
-    transition: background-color 0.3s ease;
-  }
-  
-  .delete-btn:hover {
-    background-color: #d40000;
-  }
-  
-  /* For better contrast */
-  .modal-content p,
-  .modal-content h3 {
-    color: #333; /* Dark text for better readability */
-  }
-  
-  /* Mobile responsive styles */
-  @media (max-width: 600px) {
-    .modal-content {
-      padding: 15px;
-      max-width: 90%;
-    }
-  
-    h3 {
-      font-size: 20px;
-    }
-  
-    p {
-      font-size: 14px;
-    }
-  
-    .qr-image {
-      width: 90px; /* Smaller QR image */
-      height: 90px;
-    }
-  }
-  
+}

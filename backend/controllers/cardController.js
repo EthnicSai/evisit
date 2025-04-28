@@ -76,4 +76,46 @@ const downloadQR = async (req, res) => {
   }
 };
 
-module.exports = { addCard, getCards, getCard, downloadQR, deleteCard };
+const addExistingCardToUser = async (req, res) => {
+  try {
+    const { cardId } = req.params;
+    const { userId } = req.body;
+
+    const originalCard = await Card.findById(cardId);
+
+    if (!originalCard) {
+      return res.status(404).json({ error: 'Original card not found' });
+    }
+
+    // Optional: Check if a similar card already exists for this user
+    // const existing = await Card.findOne({ userId, email: originalCard.email });
+    // if (existing) return res.status(400).json({ error: 'Card already exists for this user' });
+
+    const newCard = new Card({
+      name: originalCard.name,
+      age: originalCard.age,
+      qualification: originalCard.qualification,
+      designation: originalCard.designation,
+      phone: originalCard.phone,
+      email: originalCard.email,
+      imageUrl: originalCard.imageUrl,
+      qrCode: await QRCode.toDataURL(originalCard.name), // You can regenerate if needed
+      userId
+    });
+
+    await newCard.save();
+    res.status(201).json({ message: 'Card copied to new user', card: newCard });
+  } catch (err) {
+    console.error('Error copying card:', err);
+    res.status(500).json({ error: 'Server Error' });
+  }
+};
+
+module.exports = {
+  addCard,
+  getCards,
+  getCard,
+  downloadQR,
+  deleteCard,
+  addExistingCardToUser // 🔥 Don't forget to export it
+};

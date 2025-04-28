@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams, useNavigate, Link } from 'react-router-dom'; // <-- Import Link here
 import CardModal from './CardModal'; // Import the CardModal component
 import '../styles/CardManager.css';
 
@@ -33,10 +33,6 @@ const CardManager = () => {
     navigate('/login');
   };
 
-  const handleViewCards = () => {
-    navigate(`/cards/view/${userId}`);
-  };
-
   const openModal = (card) => {
     setSelectedCard(card);
   };
@@ -60,20 +56,26 @@ const CardManager = () => {
 
   return (
     <div className="card-manager-container">
+      <nav className="navbar">
+        <div className="navbar-brand">
+          <h1>
+            <Link to="/">E-VisitCard</Link> {/* Make sure Link is used here */}
+          </h1>
+        </div>
+        <div className="navbar-links">
+          <button onClick={() => navigate(`/cards/create/${userId}`)}>Create New Card</button>
+          <button onClick={handleLogout}>Logout</button>
+        </div>
+      </nav>
+
       <h2>Your Cards</h2>
       {error && <p className="error-message">{error}</p>}
 
-      <div className="button-group">
-        <button onClick={() => navigate(`/cards/create/${userId}`)}>Create New Card</button>
-        {/* <button onClick={handleViewCards}>View Cards</button> */}
-        <button onClick={handleLogout}>Logout</button>
-      </div>
-
-      {cards.length === 0 ? (
-        <p>No cards found.</p>
-      ) : (
-        <div className="card-list">
-          {cards.map((card) => (
+      <div className="card-list">
+        {cards.length === 0 ? (
+          <p>No cards found.</p>
+        ) : (
+          cards.map((card) => (
             <div key={card._id} className="card-preview">
               <h3>{card.name}</h3>
               <p>Age: {card.age}</p>
@@ -87,10 +89,11 @@ const CardManager = () => {
                 />
               )}
               <button onClick={() => openModal(card)}>View Card</button>
+              <button onClick={() => handleDelete(card._id)}>Delete</button>
             </div>
-          ))}
-        </div>
-      )}
+          ))
+        )}
+      </div>
 
       {selectedCard && (
         <CardModal card={selectedCard} closeModal={closeModal} handleDelete={handleDelete} />

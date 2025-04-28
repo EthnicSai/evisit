@@ -1,72 +1,139 @@
 import React, { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
-import '../styles/SignupPage.css';  // Import the specific CSS for this page
+import '../styles/SignUpPage.css';
 
-const SignupPage = () => {
+const SignUpPage = () => {
   const [formData, setFormData] = useState({
-    username: '',
+    name: '',
     email: '',
-    password: '',
+    password: ''
   });
   const [error, setError] = useState('');
-  const [isSubmitting, setIsSubmitting] = useState(false); // Add loading state
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const navigate = useNavigate();
+  const API_URL = import.meta.env.VITE_API_URL;
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData((prev) => ({ ...prev, [name]: value }));
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: value
+    }));
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setIsSubmitting(true); // Set loading state to true
+    setIsSubmitting(true);
+    setError('');
 
     try {
-      const res = await axios.post(`${import.meta.env.VITE_API_URL}/api/users/register`, formData);
-      navigate('/login'); // Redirect to login after successful signup
+      const res = await axios.post(`${API_URL}/api/users/register`, {
+        username: formData.name,
+        email: formData.email,
+        password: formData.password
+      });
+
+      navigate('/login');
     } catch (err) {
       setError(err.response?.data?.message || 'Error creating account, please try again.');
     } finally {
-      setIsSubmitting(false); // Reset loading state after request
+      setIsSubmitting(false);
     }
   };
 
   return (
-    <div className="signup-container">
-      <h2>Sign Up</h2>
-      {error && <p className="error-message">{error}</p>}
-      <form onSubmit={handleSubmit}>
-        <input
-          type="text"
-          name="username"
-          value={formData.username}
-          onChange={handleChange}
-          placeholder="Full Name"
-          required
-        />
-        <input
-          type="email"
-          name="email"
-          value={formData.email}
-          onChange={handleChange}
-          placeholder="Email"
-          required
-        />
-        <input
-          type="password"
-          name="password"
-          value={formData.password}
-          onChange={handleChange}
-          placeholder="Password"
-          required
-        />
-        <button type="submit" disabled={isSubmitting}>
-          {isSubmitting ? 'Signing Up...' : 'Sign Up'}
-        </button>
-      </form>
+    <div className="signup-page">
+      {/* Navbar */}
+      <nav className="navbar">
+        <div className="navbar-brand">
+          <h1>
+            <Link to="/">E-VisitCard</Link>
+          </h1>
+        </div>
+        <div className="navbar-links">
+          <Link to="/features">Features</Link>
+          <Link to="/templates">Templates</Link>
+          <Link to="/pricing">Pricing</Link>
+          <Link to="/login" className="login-link">Login</Link>
+        </div>
+      </nav>
+
+      {/* Sign-Up Section */}
+      <section className="signup-section fade-in">
+        <div className="signup-content">
+          <h1>Create Your Account</h1>
+          <p>Start building your digital business card today.</p>
+          {error && <p className="error-message">{error}</p>}
+          <form onSubmit={handleSubmit} className="signup-form">
+            <input
+              type="text"
+              name="name"
+              placeholder="Full Name"
+              value={formData.name}
+              onChange={handleChange}
+              required
+            />
+            <input
+              type="email"
+              name="email"
+              placeholder="Email Address"
+              value={formData.email}
+              onChange={handleChange}
+              required
+            />
+            <input
+              type="password"
+              name="password"
+              placeholder="Password"
+              value={formData.password}
+              onChange={handleChange}
+              required
+            />
+            <button type="submit" className="primary-btn" disabled={isSubmitting}>
+              {isSubmitting ? 'Signing Up...' : 'Sign Up'}
+            </button>
+          </form>
+          <p className="login-redirect">
+            Already have an account? <Link to="/login">Login here</Link>
+          </p>
+        </div>
+      </section>
+
+      {/* Footer */}
+      <footer className="footer fade-in">
+        <div className="footer-content">
+          <div className="footer-section">
+            <h3>E-VisitCard</h3>
+            <p>Digital business cards for the modern professional.</p>
+          </div>
+          <div className="footer-section">
+            <h4>Quick Links</h4>
+            <Link to="/about">About Us</Link>
+            <Link to="/contact">Contact</Link>
+            <Link to="/blog">Blog</Link>
+          </div>
+          <div className="footer-section">
+            <h4>Legal</h4>
+            <Link to="/privacy">Privacy Policy</Link>
+            <Link to="/terms">Terms of Service</Link>
+          </div>
+          <div className="footer-section">
+            <h4>Connect</h4>
+            <div className="social-icons">
+              <a href="#"><i className="fab fa-twitter" aria-hidden="true"></i></a>
+              <a href="#"><i className="fab fa-linkedin" aria-hidden="true"></i></a>
+              <a href="#"><i className="fab fa-facebook" aria-hidden="true"></i></a>
+              <a href="#"><i className="fab fa-instagram" aria-hidden="true"></i></a>
+            </div>
+          </div>
+        </div>
+        <div className="footer-bottom">
+          <p>© {new Date().getFullYear()} E-VisitCard Generator. All rights reserved.</p>
+        </div>
+      </footer>
     </div>
   );
 };
 
-export default SignupPage;
+export default SignUpPage;

@@ -1,147 +1,136 @@
-/* cardManager.css */
+/* Import Font */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+
+/* Base Styles */
 .card-manager-container {
-    text-align: center;
-    padding: 3rem;
-    background-color: #AFDDE5; /* Light Teal background */
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: center;
-  }
-  
-  .card-manager-container h2 {
-    font-size: 2.5rem;
-    color: #604652; /* Dark Purple */
-    margin-bottom: 1.5rem;
-  }
-  
-  .error-message {
-    color: #FF4D4D; /* Red color for error messages */
-    font-size: 1.125rem;
-    margin-bottom: 1rem;
-  }
-  
-  .button-group {
-    display: flex;
-    gap: 1.25rem;
-    margin-bottom: 2rem;
-  }
-  
-  .button-group button {
-    background-color: #D29F80; /* Light Beige */
-    color: #fff;
-    border: none;
-    padding: 12px 30px;
-    font-size: 16px;
-    border-radius: 25px;
-    cursor: pointer;
-    transition: background-color 0.3s ease-in-out;
-  }
-  
-  .button-group button:hover {
-    background-color: #604652; /* Dark Purple */
-  }
-  
-  .card-list {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 1.5rem;
-    justify-content: center;
-  }
-  
-  .card-preview {
-    background-color: #ffffff; /* White background for card previews */
-    padding: 1.5rem;
-    border-radius: 10px;
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-    width: 250px;
-    text-align: left;
-    color: #604652; /* Dark Purple */
-  }
-  
-  .card-preview h3 {
-    font-size: 1.5rem;
-    margin-bottom: 1rem;
-  }
-  
-  .card-preview p {
-    font-size: 1rem;
-    margin: 0.5rem 0;
-  }
-  
-  .card-preview button {
-    background-color: #D29F80; /* Light Beige */
-    color: #fff;
-    border: none;
-    padding: 10px 25px;
-    font-size: 14px;
-    border-radius: 25px;
-    margin-top: 1rem;
-    cursor: pointer;
-    transition: background-color 0.3s ease-in-out;
-  }
-  
-  .card-preview button:hover {
-    background-color: #604652; /* Dark Purple */
-  }
-  
-  @media (max-width: 768px) {
-    .card-manager-container {
-      padding: 2rem;
-    }
-  
-    .card-preview {
-      width: 100%;
-      max-width: 400px;
-    }
-  
-    .button-group {
-      flex-direction: column;
-      gap: 1rem;
-    }
-  }
-  
-  /* CardManager.css */
+  font-family: 'Inter', sans-serif;
+  background-color: #f9fafb;
+  color: #1f2937;
+  min-height: 100vh;
+  padding-bottom: 3rem;
+}
 
-/* Modal Styles */
-.modal-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+/* Navbar */
+.navbar {
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
-  z-index: 1000; /* Ensure it's on top of other content */
-}
-
-.modal-content {
+  padding: 1rem 5%;
   background-color: white;
-  padding: 20px;
-  border-radius: 8px;
-  width: 80%;
-  max-width: 600px;
-  text-align: center;
-  position: relative;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.06);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  flex-wrap: wrap;
+}
+.navbar-brand h1 a {
+  text-decoration: none;
+  color: #5A67D8;
+  font-size: 1.8rem;
+}
+.navbar-links {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+.navbar-links button {
+  background-color: transparent;
+  border: none;
+  font-weight: 600;
+  color: #1f2937;
+  cursor: pointer;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+.navbar-links button:hover {
+  background-color: #5A67D8;
+  color: white;
 }
 
+/* Headings */
+.card-manager-container h2 {
+  text-align: center;
+  margin: 2rem 0;
+  font-size: 2rem;
+  color: #2c3e50;
+}
+
+/* Error Message */
+.error-message {
+  color: #e53e3e;
+  text-align: center;
+  margin-bottom: 1rem;
+  font-weight: 500;
+}
+
+/* Card List */
+.card-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem;
+  padding: 0 10%;
+}
+
+/* Individual Card */
+.card-preview {
+  background-color: white;
+  padding: 1.5rem;
+  border-radius: 10px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+  text-align: center;
+  transition: transform 0.2s ease;
+}
+.card-preview:hover {
+  transform: translateY(-5px);
+}
+.card-preview h3 {
+  margin-bottom: 0.5rem;
+  color: #2c3e50;
+}
+.card-preview p {
+  margin: 0.3rem 0;
+  color: #4a5568;
+}
+
+/* Card Image */
 .card-image {
+  margin-top: 1rem;
   max-width: 100%;
   height: auto;
   border-radius: 8px;
-  margin-bottom: 15px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
 }
 
-.close-modal-btn {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  font-size: 20px;
-  background: transparent;
+/* Buttons */
+.card-preview button {
+  margin-top: 1rem;
+  margin-right: 0.5rem;
+  padding: 0.7rem 1.2rem;
   border: none;
+  border-radius: 6px;
+  font-weight: 600;
   cursor: pointer;
-  color: #ff0000;
+  background: linear-gradient(to right, #5A67D8, #7F9CF5);
+  color: white;
+  transition: transform 0.3s ease;
+}
+.card-preview button:hover {
+  transform: scale(1.05);
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  .navbar {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .navbar-links {
+    flex-direction: column;
+    width: 100%;
+    margin-top: 1rem;
+  }
+  .card-list {
+    padding: 0 5%;
+  }
 }
