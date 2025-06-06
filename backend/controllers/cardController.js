@@ -6,9 +6,9 @@ const path = require('path');
 const addCard = async (req, res) => {
   try {
     const { name, age, qualification, designation, phone, email, userId } = req.body;
-    const imageUrl = req.file ? `/uploads/${req.file.filename}` : '';
+    const imageUrl = req.file ? `/uploads/${req.file.filename}` : '';  // Save image URL
+    const qrCode = await QRCode.toDataURL(name);
 
-    // Create card without QR code first
     const newCard = new Card({
       name,
       age,
@@ -17,23 +17,13 @@ const addCard = async (req, res) => {
       phone,
       email,
       imageUrl,
-      qrCode: '',
+      qrCode,
       userId
     });
 
-    // Save to generate _id
     await newCard.save();
-
-    // Generate QR using the card's ID
-    const qrCode = await QRCode.toDataURL(newCard._id.toString());
-
-    // Update card with QR code
-    newCard.qrCode = qrCode;
-    await newCard.save();
-
     res.status(200).json(newCard);
   } catch (err) {
-    console.error('Error adding card:', err);
     res.status(500).json({ error: 'Server Error' });
   }
 };
@@ -68,9 +58,6 @@ const getCards = async (req, res) => {
 const getCard = async (req, res) => {
   try {
     const card = await Card.findById(req.params.id);
-    if (!card) {
-      return res.status(404).json({ error: 'Card not found' });
-    }
     res.status(200).json(card);
   } catch (err) {
     res.status(500).json({ error: 'Server Error' });
@@ -81,30 +68,29 @@ const getCard = async (req, res) => {
 const downloadQR = async (req, res) => {
   try {
     const card = await Card.findById(req.params.id);
-    if (!card) {
-      return res.status(404).json({ error: 'Card not found' });
-    }
-
     const qrCodePath = path.join(__dirname, `../uploads/qr-${req.params.id}.png`);
-    await QRCode.toFile(qrCodePath, card._id.toString());
+    await QRCode.toFile(qrCodePath, card.qrCode);
     res.download(qrCodePath);
   } catch (err) {
     res.status(500).json({ error: 'Server Error' });
   }
 };
 
-// Copy existing card to another user
 const addExistingCardToUser = async (req, res) => {
   try {
     const { cardId } = req.params;
     const { userId } = req.body;
 
     const originalCard = await Card.findById(cardId);
+
     if (!originalCard) {
       return res.status(404).json({ error: 'Original card not found' });
     }
 
-    // Create new card instance
+    // Optional: Check if a similar card already exists for this user
+    // const existing = await Card.findOne({ userId, email: originalCard.email });
+    // if (existing) return res.status(400).json({ error: 'Card already exists for this user' });
+
     const newCard = new Card({
       name: originalCard.name,
       age: originalCard.age,
@@ -113,16 +99,11 @@ const addExistingCardToUser = async (req, res) => {
       phone: originalCard.phone,
       email: originalCard.email,
       imageUrl: originalCard.imageUrl,
-      qrCode: '',
+      qrCode: await QRCode.toDataURL(originalCard.name), // You can regenerate if needed
       userId
     });
 
     await newCard.save();
-
-    // Generate QR using new card ID
-    newCard.qrCode = await QRCode.toDataURL(newCard._id.toString());
-    await newCard.save();
-
     res.status(201).json({ message: 'Card copied to new user', card: newCard });
   } catch (err) {
     console.error('Error copying card:', err);
@@ -136,5 +117,5 @@ module.exports = {
   getCard,
   downloadQR,
   deleteCard,
-  addExistingCardToUser
+  addExistingCardToUser // 🔥 Don't forget to export it
 };
