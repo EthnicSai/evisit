@@ -99,7 +99,7 @@ const addExistingCardToUser = async (req, res) => {
       phone: originalCard.phone,
       email: originalCard.email,
       imageUrl: originalCard.imageUrl,
-      qrCode: await QRCode.toDataURL(originalCard.name), // You can regenerate if needed
+      qrCode: await QRCode.toDataURL(originalCard.id), // You can regenerate if needed
       userId
     });
 
