@@ -8,7 +8,7 @@ const cardSchema = new mongoose.Schema({
   phone: { type: String, required: true },
   email: { type: String, required: true },
   imageUrl: { type: String },
-  qrCode: { type: String, required: true },
+  qrCode: { type: String, required: false },
   userId: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true }
 });
 
