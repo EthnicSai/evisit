@@ -39,9 +39,7 @@ const LoginPage = () => {
           </h1>
         </div>
         <div className="navbar-links">
-          <Link to="/features">Features</Link>
-          <Link to="/templates">Templates</Link>
-          <Link to="/pricing">Pricing</Link>
+          <Link to="/signup">Sign-Up</Link>
           <Link to="/login" className="login-link">Login</Link>
         </div>
       </nav>

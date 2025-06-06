@@ -11,9 +11,7 @@ const LandingPage = () => {
           <h1>E-VisitCard</h1>
         </div>
         <div className="navbar-links">
-          <Link to="/features">Features</Link>
-          <Link to="/templates">Templates</Link>
-          <Link to="/pricing">Pricing</Link>
+          <Link to="/signup">Sign-Up</Link>
           <Link to="/login" className="login-link">Login</Link>
         </div>
       </nav>
@@ -25,12 +23,11 @@ const LandingPage = () => {
           <p>Transform your professional networking with customizable, shareable e-visiting cards.</p>
           <div className="cta-buttons">
             <Link to="/signup" className="primary-btn">Get Started Free</Link>
-            <Link to="/templates" className="secondary-btn">View Templates</Link>
           </div>
         </div>
-        <div className="hero-image">
+        {/* <div className="hero-image">
           <img src="/images/hero-card.png" alt="Example of a digital business card" />
-        </div>
+        </div> */}
       </section>
 
       {/* Features Section */}
@@ -79,18 +76,18 @@ const LandingPage = () => {
             {
               quote: '"This service revolutionized how I network at conferences!"',
               img: '/images/user1.jpg',
-              name: 'Sarah J., Marketing Director'
+              name: 'Ethnic Sai Arroju'
             },
             {
               quote: '"My clients love how professional my digital card looks."',
               img: '/images/user2.jpg',
-              name: 'Michael T., Freelance Designer'
+              name: 'Varshith Kotha'
             }
           ].map((testimonial, index) => (
             <div className="testimonial" key={index}>
               <p>{testimonial.quote}</p>
               <div className="user">
-                <img src={testimonial.img} alt={testimonial.name} />
+                {/* <img src={testimonial.img} alt={testimonial.name} /> */}
                 <span>{testimonial.name}</span>
               </div>
             </div>
